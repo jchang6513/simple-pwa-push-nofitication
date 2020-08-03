@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>simple pwa push notification</title>
+  </head>
+  <body>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-messaging.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyC_o0SEqTTDfPz9QNj6uupDybfwLrfo1FQ",
+        authDomain: "simple-pwa-push-notification.firebaseapp.com",
+        databaseURL: "https://simple-pwa-push-notification.firebaseio.com",
+        projectId: "simple-pwa-push-notification",
+        storageBucket: "simple-pwa-push-notification.appspot.com",
+        messagingSenderId: "1049497671670",
+        appId: "1:1049497671670:web:501180a55748a03df1d9d7",
+        measurementId: "G-Y1GDLEGSJ4"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+
+      var messaging = firebase.messaging();
+      messaging.usePublicVapidKey('BMXYXyWMaahXl0nmXH7jRU5Aj-sswQZaJ3REzHp_OQ29LZ8ivrQZfrkTAHMsg6XtfdxnAwPBq6Y47SXn7_GKbw8');
+
+      messaging
+        .requestPermission()
+        .then(function() {
+          console.log('Notification permission granted.');
+        })
+        .catch(function(err) {
+          console.log('Unable to get permission to notify.', err);
+        });
+      messaging.getToken()
+        .then((currentToken) => {
+          console.log(currentToken)
+        })
+      messaging.onTokenRefresh(() => {
+        messaging.getToken()
+          .then((refreshToken) => {
+            console.log('Token refresh')
+          })
+      })
+      messaging.onMessage((payload) => {
+        console.log('Message received.', payload)
+      })
+    </script>
+  </body>
+</html>

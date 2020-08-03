@@ -1,0 +1,11 @@
+{
+  "short_name": "spwapn",
+  "name": "Simple PWA Push Notification",
+  "icons": [],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#000000",
+  "gcm_sender_id": "103953800507"
+}
